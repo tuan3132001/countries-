@@ -1,16 +1,23 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 
 function Option(props) {
     const { region } = props;
+    const navigate = useNavigate();
+
+    const handleValueOption = () => {
+        if (region.value !== 'All') navigate(`/region/${region.value}`)
+        else navigate('/')
+    }
     return (
-        <div>
-            <OptionItem >
-                <region.icon />
-                <span>{region.value}</span>
-            </OptionItem>
-        </div>
+
+        <OptionItem onClick={handleValueOption}>
+            <region.icon />
+            <span>{region.value}</span>
+        </OptionItem>
+
     );
 }
 
