@@ -1,19 +1,29 @@
 import styled from "styled-components";
 import Country from "./Country";
+import { getCountries } from '../../Store/Actions/countriesAction';
+import ScrollBar from 'react-perfect-scrollbar';
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+
+
 
 function Countries() {
+    const dispatch = useDispatch();
+    const countries = useSelector(state => state.Countries.countries);
 
+    useEffect(() => {
+        dispatch(getCountries())
+    }, [])
     return (
-        <CountriesContainer>
-            <Country />
-            <Country />
-            <Country />
-            <Country />
-            <Country />
-            <Country />
-            <Country />
-            <Country />
-        </CountriesContainer>
+        <ScrollBar style={{ maxHeight: '70vh', overflow: 'hidden' }}>
+            <CountriesContainer>
+                {
+                    countries.map((country, index) => (
+                        <Country country={country} key={index} />
+                    ))
+                }
+            </CountriesContainer>
+        </ScrollBar>
     )
 }
 export default Countries;

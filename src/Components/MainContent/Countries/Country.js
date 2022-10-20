@@ -2,23 +2,24 @@ import { useContext } from "react";
 import styled from "styled-components";
 import { ThemeContext } from "../../ThemeContext/themeContext";
 
-function Country() {
+function Country(props) {
+    const { country } = props;
     const themeContext = useContext(ThemeContext);
     return (
         <CountryCard className={themeContext.theme}>
             <div className="flag">
-                <img src="https://vuongquocanh.com/wp-content/uploads/2018/04/la-co-vuong-quoc-anh.jpg" alt="" />
+                <img src={country.flag} alt="" />
             </div>
             <CountryInfo>
-                <h3>Afghanistan</h3>
-                <div>Population
-                    <span>123.456.789</span>
+                <h3>{country.name}</h3>
+                <div>Population:
+                    <span>{country.population}</span>
                 </div>
-                <div>Region
-                    <span>Asia</span>
+                <div>Region:
+                    <span>{country.region}</span>
                 </div>
-                <div>Capital
-                    <span>Kabul</span>
+                <div>Capital:
+                    <span>{country.capital}</span>
                 </div>
             </CountryInfo>
         </CountryCard>
@@ -69,6 +70,7 @@ const CountryInfo = styled.div`
         margin: 4px 0;
         span {
             font-weight: 400;
+            margin-left: 4px;
         }
     }
 `;
