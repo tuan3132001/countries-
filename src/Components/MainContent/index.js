@@ -6,9 +6,9 @@ import SearchAndFilter from "./SearchAndFilter";
 function MainContent(props) {
     return (
         <div>
-            {/* <SearchAndFilter />
-            <Countries /> */}
-            <CountryDetail />
+            <SearchAndFilter />
+            <Countries />
+
         </div>
     );
 }
