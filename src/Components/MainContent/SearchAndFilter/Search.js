@@ -1,19 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { MdSearch } from "react-icons/md";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 
 function Search(props) {
+    const [valueInput, setValueInput] = useState('');
+    const navigate = useNavigate();
+
+    const handleKeyDown = (e) => {
+        if (e.keyCode === 13) {
+            (valueInput !== '') ? navigate(`/search/${valueInput}`) : navigate('/')
+        }
+    }
     return (
         <SearchPane>
             <h3>Search Country:</h3>
             <SearchElement>
                 <input
                     type="text"
-                    placeholder='Input the and enter the search...' />
-                <div style={{ width: '40px', height: '100%' }}>
-                    <MdSearch className="icon" />
-                </div>
+                    placeholder='Input the and enter the search...'
+                    onChange={e => setValueInput(e.target.value)}
+                    value={valueInput}
+                    onKeyDown={handleKeyDown} />
+                <Link to={valueInput !== '' ? `/search/${valueInput}` : `/`}>
+                    <div style={{ width: '40px', height: '100%' }}>
+                        <MdSearch className="icon" />
+                    </div>
+                </Link>
             </SearchElement>
         </SearchPane>
     );
