@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import Loading from "../../Loading/Loading";
 import { getCountryByName } from "../../Store/Actions/countriesAction";
 import { ThemeContext } from "../../ThemeContext/themeContext";
 import CountryInfo from "./CountryInfo";
@@ -12,6 +13,8 @@ function CountryDetail(props) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const country = useSelector(state => state.Countries.country);
+    const loading = useSelector(state => state.Countries.loading);
+
 
     useEffect(() => {
         dispatch(getCountryByName(slug.countryName));
@@ -19,12 +22,16 @@ function CountryDetail(props) {
     return (
         <Wrapper>
             <div className={`goback-btn ${themeContext.theme}`} onClick={() => navigate(-1)}>Go back</div>
-            <CountryContainer>
-                <div className="flagCountry">
-                    <img src={country ? country.flag : 'https://via.placeholder.com/300x200?text=Image+Error'} alt="" />
-                </div>
-                <CountryInfo />
-            </CountryContainer>
+            {
+                loading ? <Loading /> :
+                    <CountryContainer>
+                        <div className="flagCountry">
+                            <img src={country ? country.flag : 'https://via.placeholder.com/300x200?text=Image+Error'} alt="" />
+                        </div>
+                        <CountryInfo />
+                    </CountryContainer>
+            }
+
         </Wrapper>
     )
 }

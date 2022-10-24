@@ -7,6 +7,7 @@ import MainContent from './Components/MainContent';
 import { ThemeContext } from './Components/ThemeContext/themeContext';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import CountryDetail from './Components/MainContent/CountryDetail';
+import Footer from './Components/Footer';
 
 function App() {
   const themeContext = useContext(ThemeContext);
@@ -23,6 +24,7 @@ function App() {
             <Route path='/search/:name' element={<MainContent />} />
           </Routes>
         </ContentContainer>
+        <Footer />
       </Router>
 
     </AppContainer>

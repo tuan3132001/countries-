@@ -23,10 +23,8 @@ function Search(props) {
                     onChange={e => setValueInput(e.target.value)}
                     value={valueInput}
                     onKeyDown={handleKeyDown} />
-                <Link to={valueInput !== '' ? `/search/${valueInput}` : `/`}>
-                    <div style={{ width: '40px', height: '100%' }}>
-                        <MdSearch className="icon" />
-                    </div>
+                <Link to={valueInput !== '' ? `/search/${valueInput}` : `/`} style={{ width: '40px', height: '100%' }}>
+                    <MdSearch className="icon" />
                 </Link>
             </SearchElement>
         </SearchPane>

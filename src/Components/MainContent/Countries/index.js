@@ -5,6 +5,7 @@ import ScrollBar from 'react-perfect-scrollbar';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import Loading from "../../Loading/Loading";
 
 
 
@@ -12,6 +13,7 @@ import { useParams } from "react-router-dom";
 function Countries() {
     const dispatch = useDispatch();
     const countries = useSelector(state => state.Countries.countries);
+    const loading = useSelector(state => state.Countries.loading);
     const slug = useParams();
 
     useEffect(() => {
@@ -20,15 +22,22 @@ function Countries() {
         else dispatch(getCountries());
     }, [dispatch, slug.regionName, slug.name])
     return (
-        <ScrollBar style={{ maxHeight: '70vh', overflow: 'hidden' }}>
-            <CountriesContainer>
-                {
-                    countries.map((country, index) => (
-                        <Country country={country} key={index} />
-                    ))
-                }
-            </CountriesContainer>
-        </ScrollBar>
+        <>
+            {
+                loading ? (<Loading />) :
+                    (
+                        <ScrollBar style={{ maxHeight: '70vh', overflow: 'hidden' }}>
+                            <CountriesContainer>
+                                {
+                                    countries.map((country, index) => (
+                                        <Country country={country} key={index} />
+                                    ))
+                                }
+                            </CountriesContainer>
+                        </ScrollBar>
+                    )
+            }
+        </>
     )
 }
 export default Countries;
